@@ -1,13 +1,47 @@
-<!--index.wxml-->
+<!--首页-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <!-- 用户第一次登陆显示表单要求填写信息并授权给微信 -->
+    <view wx:if="{{!hasUserInfo}}" class="padding-top-sm">
+        <form bindsubmit="formSubmit">
+            <view class="padding-sm guide">
+                <text>step1：介绍自己</text>
+            </view>
+            <view class="padding-sm">
+                <view class="font-bolder">昵称</view>
+                <input name="input" placeholder="填写称呼" class="margin-top-sm"/>
+            </view>
+            <view class="padding-sm">
+                <view class="font-bolder">性别</view>
+                <radio-group name="radio-group" class="margin-top-sm">
+                    <label><radio value="radio1"/>男</label>
+                    <label><radio value="radio2" class="margin-left"/>女</label>
+                </radio-group>
+            </view>
+            <view class="padding-sm">
+                <view class="font-bolder">{{province}}省 {{city}}市 {{county}}</view>
+                <picker-view value="{{value}}" bindchange="bindChange">
+                    <picker-view-column>
+                        <view wx:for="{{province}}">{{item}}</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{city}}">{{item}}</view>
+                    </picker-view-column>
+                    <picker-view-column>
+                        <view wx:for="{{county}}">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+            <view class="padding-sm">
+                <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权微信</button>
+            </view>
+
+        </form>
+    </view>
+
+    <!--真正的首页-->
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+
 </view>

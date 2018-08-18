@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "van-panel": "../../vantui/panel/index",
+        "van-button": "../../vantui/button/index",
+        "van-field": "../../vantui/field/index"
+    }
+}
