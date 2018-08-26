@@ -1,3 +1,4 @@
 # locallism-wxapp
 方言怪的微信小程序端
-#first time to commit
+
+微信端使用了vantui
